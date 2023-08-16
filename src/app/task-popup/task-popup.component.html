@@ -1,5 +1,15 @@
 <div>
-    <h2>Sample Dialog</h2>
-    <p>This is a sample dialog content.</p>
-    <button mat-raised-button color="primary" (click)="closeDialog()">Close</button>
+    <h2 style="text-align: center;">Edit Task Dialogue</h2>
+    <form [formGroup]="updateForm">
+        <div style="padding: 10%;">
+            <mat-form-field appearance="fill">
+                <mat-label>Task</mat-label>
+                <input formControlName="item" matInput placeholder="Task">
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                <mat-hint>Update Task</mat-hint>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="updateTask()">update</button>
+            <button mat-raised-button color="primary" (click)="closeDialog()">Close</button>
+        </div>
+    </form>
 </div>

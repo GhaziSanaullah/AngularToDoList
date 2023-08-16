@@ -10,9 +10,7 @@
                             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                             <mat-hint>Add Task</mat-hint>
                         </mat-form-field>
-                        <button *ngIf="!isEditEnabled" (click)="addTask()" mat-raised-button color="accent" [disabled]="todoForm.invalid">Add</button>
-                        <button *ngIf="isEditEnabled" (click)="updateTask()" mat-raised-button color="accent" [disabled]="todoForm.invalid">Update</button>
-                        <button *ngIf="isEditEnabled" (click)="cancelEdit()" mat-raised-button color="accent" [disabled]="todoForm.invalid">Cancel</button>
+                        <button (click)="addTask()" mat-raised-button color="accent" [disabled]="todoForm.invalid">Add</button>
                     </form>
                 </mat-card>
         </div>
@@ -26,9 +24,8 @@
                                 <div class="example-box" *ngFor="let item of tasks; let i = index" cdkDrag [@taskToDone]>{{item.description}}
                                     <div class="box">
                                         <button mat-icon-button color="warn" (click)="deleteTask(i)"><mat-icon>delete</mat-icon></button>
-                                        <button mat-icon-button color="primary" (click)="onEdit(item,i)"><mat-icon>edit</mat-icon></button>
+                                        <button mat-icon-button color="primary" (click)="onEditTask(item,i)"><mat-icon>edit</mat-icon></button>
                                         <button mat-icon-button color="primary" (click)="moveToDone(i)"><mat-icon>check_circle</mat-icon></button>
-                                        <button mat-icon-button color="warn" (click)="openDialog()"><mat-icon>check_circle</mat-icon></button>
                                     </div>
                                 </div>
                             </div>

@@ -15,7 +15,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { TaskPopupComponent } from './task-popup/task-popup.component';
 
 
 
@@ -23,7 +23,8 @@ import { MatDialogModule } from '@angular/material/dialog';
   declarations: [
     AppComponent,
     NavbarComponent,
-    TodoComponent
+    TodoComponent,
+    TaskPopupComponent
   ],
   imports: [
     BrowserModule,

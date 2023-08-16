@@ -8,6 +8,7 @@ import { TaskPopupComponent } from '../task-popup/task-popup.component';
 import { DialogService } from '../dialog.service';
 
 
+
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
@@ -26,11 +27,9 @@ export class TodoComponent
   todoForm !:FormGroup;
   tasks:ITask[]=[];
   done:ITask[]=[];
-  updateId:any;
-  isEditEnabled:boolean=false;
   triggerAnimation:boolean = false;
 
-  constructor(private fb:FormBuilder,private dialogService: DialogService){}
+  constructor(private fb:FormBuilder,private dialogService: DialogService,private dialog: MatDialog){}
   openDialog() {
     this.dialogService.openSampleDialog();
   }
@@ -53,23 +52,16 @@ export class TodoComponent
   deleteDoneTask(i:number){
     this.done.splice(i,1)
   }
-  onEdit(item:ITask,i:number)
-  {
-    this.todoForm.controls['item'].setValue(item.description);
-    this.updateId=i;
-    this.isEditEnabled=true;
-  }
-  updateTask(){
-    this.tasks[this.updateId].description=this.todoForm.value.item;
-    this.tasks[this.updateId].done=false;
-    this.todoForm.reset();
-    this.updateId=undefined;
-    this.isEditEnabled=false;
-  }
-  cancelEdit() {
-    this.todoForm.reset();
-    this.updateId = undefined;
-    this.isEditEnabled = false;
+  onEditTask(item: ITask, index: number) {
+    const dialogRef = this.dialog.open(TaskPopupComponent, {
+      width: '1000px',
+      height: '500px',
+      data: { item: item, index: index }, // Pass the item and index to the dialog
+    });
+    dialogRef.componentInstance.taskUpdated.subscribe((updatedTask: ITask) => {
+      this.tasks[index].description=updatedTask.description;
+    this.tasks[index].done=false;
+    });
   }
   moveToDone(index: number) {
     const taskToMove = this.tasks[index];
