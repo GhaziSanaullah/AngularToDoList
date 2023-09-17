@@ -1,5 +1,7 @@
+import { Component, Inject } from '@angular/core';
 import { Component, Inject, EventEmitter, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import { ITask } from '../model/task';
 
@@ -8,6 +10,7 @@ import { ITask } from '../model/task';
   templateUrl: './task-popup.component.html',
 })
 export class TaskPopupComponent {
+  constructor(private dialogRef: MatDialogRef<TaskPopupComponent>) {}
   updateForm !:FormGroup;
   @Output() taskUpdated = new EventEmitter<ITask>();
 
